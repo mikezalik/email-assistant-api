@@ -1,5 +1,4 @@
 const express = require("express");
-const emailContent = require("../../models/emailContent");
 const router = express.Router();
 require("isomorphic-fetch");
 
@@ -48,7 +47,7 @@ router.get("/tsla", async (req, res) => {
   }
 });
 
-router.get("/tsla", async (req, res) => {
+router.get("/amzn", async (req, res) => {
   try {
     await fetch(
       "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=amzn&interval=5min&apikey=07LIJ4I4DJCFIKUR"
