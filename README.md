@@ -36,17 +36,17 @@ Root URL: https://guarded-crag-28336.herokuapp.com/
 
 \*These endpoints should receive an html form, but will take JSON email and password for both registration and login. Be sure to copy bearer token when received. No qoutes.
 
-POST /auth/registration
-POST /auth/login
+- POST /auth/registration
+- POST /auth/login
 
 \*Bearer token is required to access the endpoints below. You must first register, copy and paste the bearer token you receive. This is pastable in the AUTH section of Insomnia, no qoutes. prefix is: authorization.
 
-GET /api - Returns all email templates.
+- GET /api - Returns all email templates.
 
-GET /api/amc - Returns intraday ticker information for AMC stock.
-GET /api/gme - Returns intraday ticker information for GME stock.
-GET /api/tsla - Returns intraday ticker information for TSLA stock.
-GET /api/amzn - Returns intraday ticker information for AMZN stock.
+- GET /api/amc - Returns intraday ticker information for AMC stock.
+- GET /api/gme - Returns intraday ticker information for GME stock.
+- GET /api/tsla - Returns intraday ticker information for TSLA stock.
+- GET /api/amzn - Returns intraday ticker information for AMZN stock.
 
 ## Project Summary
 
