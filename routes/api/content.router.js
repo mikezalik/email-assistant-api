@@ -1,17 +1,23 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-require("isomorphic-fetch");
+require('isomorphic-fetch');
 
-const EmailContent = require("../../models/emailContent");
+const EmailContent = require('../../models/emailContent');
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   EmailContent.find().then((content) => res.json(content));
 });
 
-router.get("/amc", async (req, res) => {
+router.get('/goodtime', (req, res) => {
+  EmailContent.find({
+    subjectLine: 'Is now still a good time?',
+  }).then((goodtime) => res.json(goodtime));
+});
+
+router.get('/amc', async (req, res) => {
   try {
     await fetch(
-      "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=amc&interval=5min&apikey=07LIJ4I4DJCFIKUR"
+      'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=amc&interval=5min&apikey=07LIJ4I4DJCFIKUR'
     )
       .then((res) => res.json(res))
       .then((json) => res.json(json));
@@ -21,10 +27,10 @@ router.get("/amc", async (req, res) => {
   }
 });
 
-router.get("/gme", async (req, res) => {
+router.get('/gme', async (req, res) => {
   try {
     await fetch(
-      "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=gme&interval=5min&apikey=07LIJ4I4DJCFIKUR"
+      'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=gme&interval=5min&apikey=07LIJ4I4DJCFIKUR'
     )
       .then((res) => res.json(res))
       .then((json) => res.json(json));
@@ -34,10 +40,10 @@ router.get("/gme", async (req, res) => {
   }
 });
 
-router.get("/tsla", async (req, res) => {
+router.get('/tsla', async (req, res) => {
   try {
     await fetch(
-      "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=tsla&interval=5min&apikey=07LIJ4I4DJCFIKUR"
+      'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=tsla&interval=5min&apikey=07LIJ4I4DJCFIKUR'
     )
       .then((res) => res.json(res))
       .then((json) => res.json(json));
@@ -47,10 +53,10 @@ router.get("/tsla", async (req, res) => {
   }
 });
 
-router.get("/amzn", async (req, res) => {
+router.get('/amzn', async (req, res) => {
   try {
     await fetch(
-      "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=amzn&interval=5min&apikey=07LIJ4I4DJCFIKUR"
+      'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=amzn&interval=5min&apikey=07LIJ4I4DJCFIKUR'
     )
       .then((res) => res.json(res))
       .then((json) => res.json(json));
@@ -60,9 +66,9 @@ router.get("/amzn", async (req, res) => {
   }
 });
 
-router.get("/");
+router.get('/');
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   const newEmailContent = new EmailContent({
     subjectLine: req.body.subjectLine,
     emailContent: req.body.emailContent,
@@ -73,7 +79,7 @@ router.post("/", (req, res) => {
   newEmailContent.save().then((content) => res.json(content));
 });
 
-router.delete("/:id", (req, res) => {
+router.delete('/:id', (req, res) => {
   EmailContent.findById(req.params.id)
     .then((content) => content.remove().then(() => res.json({ success: true })))
     .catch((err) => res.status(404).json({ success: false }));
