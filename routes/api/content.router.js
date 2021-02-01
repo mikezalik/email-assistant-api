@@ -66,8 +66,6 @@ router.get('/amzn', async (req, res) => {
   }
 });
 
-router.get('/');
-
 router.post('/', (req, res) => {
   const newEmailContent = new EmailContent({
     subjectLine: req.body.subjectLine,
